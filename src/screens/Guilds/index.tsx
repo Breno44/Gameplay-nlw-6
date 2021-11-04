@@ -45,7 +45,9 @@ export function Guilds({ handleGuildsSelect }: Props) {
         data={guilds}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <Guild data={item} onPress={() => handleGuildsSelect(item)} />}
-        ItemSeparatorComponent={() => <ListDivider />}
+        contentContainerStyle={{ paddingBottom: 69, paddingTop: 103 }}
+        ItemSeparatorComponent={() => <ListDivider isCentered />}
+        ListHeaderComponent={() => <ListDivider isCentered />}
         style={styles.guilds}
       />
     </View>
