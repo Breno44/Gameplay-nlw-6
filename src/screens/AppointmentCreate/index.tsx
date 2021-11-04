@@ -26,20 +26,28 @@ export function AppointmentCreate() {
     setOpenGuildsModal(true);
   }
 
+  function handleCloseGuilds() {
+    setOpenGuildsModal(false);
+  }
+
   function handleGuildsSelect(guildSelect: GuildProps) {
     setGuild(guildSelect);
     setOpenGuildsModal(false);
   }
 
+  function handleCategorySelect(categoryId: string) {
+    setCategory(categoryId);
+  }
+
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
-      <ScrollView>
-        <Background>
+      <Background>
+        <ScrollView>
           <Header title="Agendar Partida" />
 
           <Text style={[styles.label, { marginLeft: 24, marginTop: 36, marginBottom: 18 }]}>Categoria</Text>
 
-          <CategorySelect hasCheckBox setCategory={setCategory} categorySelected={category} />
+          <CategorySelect hasCheckBox setCategory={handleCategorySelect} categorySelected={category} />
 
           <View style={styles.form}>
             <RectButton onPress={handleOpenGuilds}>
@@ -55,7 +63,7 @@ export function AppointmentCreate() {
 
             <View style={styles.field}>
               <View>
-                <Text style={styles.label}>Dia e Mês</Text>
+                <Text style={[styles.label, { marginBottom: 12 }]}>Dia e Mês</Text>
 
                 <View style={styles.column}>
                   <SmallInput maxLength={2} />
@@ -65,7 +73,7 @@ export function AppointmentCreate() {
               </View>
 
               <View>
-                <Text style={styles.label}>Hora e Minuto</Text>
+                <Text style={[styles.label, { marginBottom: 12 }]}>Hora e Minuto</Text>
 
                 <View style={styles.column}>
                   <SmallInput maxLength={2} />
@@ -86,10 +94,10 @@ export function AppointmentCreate() {
               <Button title="Agendar" />
             </View>
           </View>
-        </Background>
-      </ScrollView>
+        </ScrollView>
+      </Background>
 
-      <ModalView visible={openGuildsModal}>
+      <ModalView visible={openGuildsModal} closeModal={handleCloseGuilds}>
         <Guilds handleGuildsSelect={handleGuildsSelect} />
       </ModalView>
     </KeyboardAvoidingView>
